@@ -2,12 +2,12 @@ const randomDamage = () => Math.floor(Math.random() * 10 + 1);
 
 const chooseOption = (opt1, opt2) => {
   const randNum = Math.round(Math.random());
-  const ranNum = 0 ? opt1 : opt2;
+  return randNum === 0 ? opt1 : opt2;
 };
 
-function attackPlayer(health) {
-  return health - randomDamage;
-}
+const attackPlayer = function(health) {
+  return health - randomDamage();
+};
 
 const logHealth = (player, health) =>
   console.log(`${player} health: ${health}`);
@@ -22,7 +22,7 @@ const isDead = health => {
   }
 };
 
-const fight = function() {
+function fight() {
   let player1 = "John Connor";
   let player2 = "The Terminator";
   let player1Health = 100;
@@ -34,19 +34,19 @@ const fight = function() {
     if (attacker === player1) {
       player2Health = attackPlayer(player2Health);
       logHealth(player2, player2Health);
-      if (isDead(player2Health)) {
+      if (isDead(player2Health) === true) {
         logDeath(player1, player2);
         break;
       } else {
         player1Health = attackPlayer(player1Health);
         logHealth(player1, player1Health);
-        if (isDead(player1Health)) {
+        if (isDead(player1Health) === true) {
           logDeath(player2, player1);
           break;
         }
       }
     }
   }
-};
+}
 
 fight();
